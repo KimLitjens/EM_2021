@@ -1,4 +1,54 @@
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    @apply text-blue-800 ;
+    
+  }
+
+
+
+  h1 {
+    @apply text-5xl
+  }
+
+  h2 {
+    @apply text-4xl
+  }
+
+  h3 {
+    @apply text-2xl
+  }
+
+h1, h2, h3 {
+  @apply m-0  
+}
+
+img{
+  @apply max-w-full max-h-72 shadow-2xl
+}
+
+} 
+
+@screen md{
+  h1 {
+    @apply text-7xl 
+  }
+
+  h2 {
+    @apply text-6xl
+  }
+
+  h3 {
+    @apply text-3xl 
+  }
+
+  :root {
+    @apply text-xl
+  }
+}
 
