@@ -4,7 +4,8 @@ import './App.css';
 
 import * as ROUTES from './constants/routes'
 const Dashboard = lazy(() => import('./pages/dashboard'));
-const Login = lazy(() => import('./pages/login'))
+const Login = lazy(() => import('./pages/login'));
+const Profile = lazy(() => import('./pages/profile'));
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
       <Suspense fallback={<p>Loading...</p>}>
         <Switch>
           <Route path={ROUTES.LOGIN} component={Login} />
+          <Route path={ROUTES.PROFILE} component={Profile} />
           <Route path={ROUTES.DASHBOARD} component={Dashboard} exact />
         </Switch>
       </Suspense>
