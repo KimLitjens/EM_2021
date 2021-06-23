@@ -7,7 +7,6 @@ export function LastGamesContainer() {
     const sortedMatchData = matchData.sort((a, b) => new Date(a.match_start) - new Date(b.match_start))
     const matchesPlayed = sortedMatchData.filter(match => match.status_code === 0)
     // const lastFiveMatches = matchesPlayed.slice(-5)
-    console.log(matchesPlayed)
 
     return (
         // <>

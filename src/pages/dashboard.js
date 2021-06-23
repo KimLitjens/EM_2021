@@ -11,10 +11,8 @@ export default function Dashboard() {
         }
         )
     ];
-    console.log(playerNames)
 
     const playerList = playerNames.map(name => {
-        console.log("🚀 ~ file: dashboard.js ~ line 17 ~ Dashboard ~ name", name)
         return <PlayerLink playerName={name} />;
     });
 
