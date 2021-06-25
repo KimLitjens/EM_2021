@@ -1,24 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext } from 'react'
+import MatchDataContext from "../context/MatchDataContext"
 import { Games } from '../components/'
 
-const ApiKey = process.env.REACT_APP_API_KEY
-
-
 export function NextGamesContainer() {
-    const [matches, setMatches] = useState([])
-    const sortedMatchData = matches.sort((a, b) => new Date(a.match_start) - new Date(b.match_start))
+    const { allMatchData } = useContext(MatchDataContext);
+    const sortedMatchData = allMatchData.sort((a, b) => new Date(a.match_start) - new Date(b.match_start))
     const nextFiveMatches = sortedMatchData.filter(match => match.status_code !== 3).slice(0, 5)
-
-    async function allMatches() {
-        const response = await fetch(`https://app.sportdataapi.com/api/v1/soccer/matches?apikey=${ApiKey}&season_id=510&date_from=2020-09-19`)
-            .then(response => response.json())
-            .then((data => setMatches(data.data)))
-        return response
-    }
-
-    useEffect(() => {
-        allMatches()
-    }, [])
 
     return (
         <>
@@ -27,5 +14,6 @@ export function NextGamesContainer() {
                 {content.match_start.slice(10, 16)} {content.home_team.name !== null ? content.home_team.name : "Unknown"} - {content.away_team !== null ? content.away_team.name : "unknown"}
             </Games.Game>))}
         </>
+        // <h1>some text</h1>
     )
 }
