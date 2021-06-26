@@ -13,5 +13,5 @@ TopScorers.Player = function Title({ children, ...restProps }) {
 }
 
 TopScorers.Goals = function Title({ children, ...restProps }) {
-    return <p {...restProps} className="text-blue-500 ml-2">{children}</p>
+    return <p {...restProps} className="text-blue-600 ml-2">{children}</p>
 }

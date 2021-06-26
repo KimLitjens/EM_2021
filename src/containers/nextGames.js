@@ -11,7 +11,9 @@ export function NextGamesContainer() {
         <>
             <Games.Title>Next Games</Games.Title>
             {nextFiveMatches.map((content) => (<Games.Game key={content.match_id}>
-                {content.match_start.slice(10, 16)} {content.home_team.name !== null ? content.home_team.name : "Unknown"} - {content.away_team !== null ? content.away_team.name : "unknown"}
+                {content.match_start.slice(8, 10)} - {content.match_start.slice(5, 7)}
+                <Games.Time>{content.match_start.slice(10, 16)}</Games.Time>
+                {content.home_team.name !== null ? content.home_team.name : "Unknown"} - {content.away_team !== null ? content.away_team.name : "unknown"}
             </Games.Game>))}
         </>
         // <h1>some text</h1>

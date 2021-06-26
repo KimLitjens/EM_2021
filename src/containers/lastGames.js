@@ -11,7 +11,8 @@ export function LastGamesContainer() {
             <Games.Title>Last Games</Games.Title>
             {lastFiveMatches.map((content) => (
                 <Games.Game key={content.match_id}>
-                    {content.home_team.name !== null ? content.home_team.name : "Unknown"} - {content.away_team !== null ? content.away_team.name : "unknown"} <Games.Score>{String(content.stats.ft_score)}</Games.Score>
+                    {content.home_team.name !== null ? content.home_team.name : "Unknown"} - {content.away_team !== null ? content.away_team.name : "unknown"}
+                    <Games.Score>{String(content.stats.ft_score)}</Games.Score>
                 </Games.Game>))}
             {/* // <h1>some text</h1> */}
         </>
