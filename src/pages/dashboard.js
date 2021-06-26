@@ -1,6 +1,7 @@
 import React from 'react'
 import { NextGamesContainer } from '../containers/nextGames'
 import { LastGamesContainer } from '../containers/lastGames'
+import { TopScorersContainer } from '../containers/topScorers'
 // import { PlayerLink } from '../containers/playerLink'
 // import { playerData } from '../playerData'
 
@@ -35,6 +36,7 @@ export default function Dashboard() {
                         <h2 className="">Score:</h2>
                         <LastGamesContainer />
                         <NextGamesContainer />
+                        <TopScorersContainer />
                     </div>
                 </div>
             </div>
