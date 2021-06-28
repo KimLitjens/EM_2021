@@ -15,3 +15,7 @@ TopScorers.Player = function Title({ children, ...restProps }) {
 TopScorers.Goals = function Title({ children, ...restProps }) {
     return <p {...restProps} className="text-blue-600 ml-2">{children}</p>
 }
+
+TopScorers.Country = function Title({ children, ...restProps }) {
+    return <p {...restProps} className="text-red-400 ml-2">{children}</p>
+}

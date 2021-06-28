@@ -24,20 +24,13 @@ export default function Dashboard() {
                     NederFrench EM 2021 (510)
             </h1>
             </header>
-            <div className="flex justify-center">
-                <div >
-                    <div >
-                        <h3>Participants:</h3>
-                        {/* <ul className="flex ml-4">
-                    {playerList}
-                </ul> */}
-                    </div>
-                    <div>
-                        <h2 className="">Score:</h2>
-                        <LastGamesContainer />
-                        <NextGamesContainer />
-                        <TopScorersContainer />
-                    </div>
+            <div className=" ">
+                <div className="flex justify-around">
+                    <LastGamesContainer />
+                    <NextGamesContainer />
+                </div>
+                <div className="flex justify-center">
+                    <TopScorersContainer />
                 </div>
             </div>
         </div>
