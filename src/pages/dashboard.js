@@ -2,20 +2,8 @@ import React from 'react'
 import { NextGamesContainer } from '../containers/nextGames'
 import { LastGamesContainer } from '../containers/lastGames'
 import { TopScorersContainer } from '../containers/topScorers'
-// import { PlayerLink } from '../containers/playerLink'
-// import { playerData } from '../playerData'
 
 export default function Dashboard() {
-    // const playerNames = [
-    //     playerData.map(item => {
-    //         return item.name;
-    //     }
-    //     )
-    // ];
-
-    // const playerList = playerNames.map(name => {
-    //     return <PlayerLink playerName={name} />;
-    // });
 
     return (
         <div className="">

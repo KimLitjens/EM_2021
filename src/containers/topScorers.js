@@ -6,7 +6,6 @@ import { TopScorers } from '../components/'
 export function TopScorersContainer() {
     const { topScorers } = useContext(MatchDataContext);
     const top10Scorers = topScorers.slice(0, 10)
-    console.log(top10Scorers)
 
     return (
         <div className="mb-4">

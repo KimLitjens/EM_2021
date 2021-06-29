@@ -6,7 +6,6 @@ export function LastGamesContainer() {
     const { allMatchData } = useContext(MatchDataContext);
     const sortedMatchData = allMatchData.sort((a, b) => new Date(a.match_start) - new Date(b.match_start))
     const lastFiveMatches = sortedMatchData.filter(match => match.status_code === 3 || match.status_code === 31 || match.status_code === 32).slice(-5)
-
     return (
         <div>
             <Games.Title>Last Games</Games.Title>

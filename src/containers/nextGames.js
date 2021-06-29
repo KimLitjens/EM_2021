@@ -18,7 +18,6 @@ export function NextGamesContainer() {
                         : "unknown"}
             </Games.Game >))
             }
-            {/* <h1>some text</h1> */}
         </div>
     )
 }
