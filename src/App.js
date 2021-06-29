@@ -5,6 +5,7 @@ import MatchDataContext from './context/MatchDataContext'
 import * as ROUTES from './constants/routes'
 
 const Dashboard = lazy(() => import('./pages/dashboard'));
+const Signup = lazy(() => import('./pages/signup'));
 
 const ApiKey = process.env.REACT_APP_API_KEY
 const allMatchesApi = `https://app.sportdataapi.com/api/v1/soccer/matches?apikey=${ApiKey}&season_id=510&date_from=2020-09-19`
@@ -15,16 +16,16 @@ export default function App() {
   const [topScorers, setTopscorers] = useState([])
 
 
-  async function getAllMatch() {
-    const response = await fetch(allMatchesApi)
-    const data = await response.json()
-    setAllMatchData(data.data)
+  function getAllMatch() {
+    fetch(allMatchesApi)
+      .then(response => response.json())
+      .then(response => setAllMatchData(response.data))
   }
 
-  async function getTopscorers() {
-    const response = await fetch(topScorersApi)
-    const data = await response.json()
-    setTopscorers(data.data)
+  function getTopscorers() {
+    fetch(topScorersApi)
+      .then(response => response.json())
+      .then(response => setTopscorers(response.data))
   }
 
   useEffect(() => {
@@ -37,6 +38,7 @@ export default function App() {
         <Suspense fallback={<p>Loading...</p>}>
           <Switch>
             <Route path={ROUTES.DASHBOARD} component={Dashboard} exact />
+            <Route path={ROUTES.SIGNUP} component={Signup} />
           </Switch>
         </Suspense>
       </Router>
