@@ -28,11 +28,11 @@ Form.Link = function FormLink({ children, ...restProps }) {
 }
 
 Form.Error = function FormError({ children, ...restProps }) {
-    return <div {...restProps}>{children}</div>;
+    return <div {...restProps} className="bg-red-500 text-white text-center">{children}</div>;
 }
 
 Form.Input = function FormInput({ children, ...restProps }) {
-    return <input {...restProps} className="border border-gray-300 rounded my-2">{children}</input>;
+    return <input {...restProps} className="border border-gray-300 text-black rounded my-2">{children}</input>;
 }
 
 Form.Label = function FormInput({ children, ...restProps }) {

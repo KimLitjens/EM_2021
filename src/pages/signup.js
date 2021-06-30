@@ -1,6 +1,7 @@
 import React, { useState, } from 'react';
 import { HeaderContainer } from '../containers/header';
 import { Form } from '../components';
+import { useAuth } from '../context/AuthContext'
 
 export default function Signup() {
 
@@ -8,14 +9,31 @@ export default function Signup() {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('')
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false)
+    const { signup, currentUser } = useAuth()
 
+    async function handleSignup(e) {
+        e.preventDefault()
+
+        if (password !== passwordConfirm) {
+            return setError('Passwords do not match')
+        }
+        try {
+            setError('')
+            setLoading(true)
+            await signup(emailAddress, password)
+        } catch {
+            setError('Failed to create an account')
+        }
+        setLoading(false)
+    }
     return (
         <div>
             <HeaderContainer />
             <Form className="">
                 <Form.Title>Sign Up</Form.Title>
                 {error && <Form.Error>{error}</Form.Error>}
-                <Form.Base method="POST">
+                <Form.Base onSubmit={handleSignup} method="POST">
                     <Form.Label for="emailAdress">Email Address</Form.Label>
                     <Form.Input
                         value={emailAddress}
@@ -30,12 +48,12 @@ export default function Signup() {
                     />
                     <Form.Label for="passwordConfirm">Password Confirmation</Form.Label>
                     <Form.Input
-                        type="passwordConfirm"
+                        type="password"
                         value={passwordConfirm}
                         autoComplete="off"
                         onChange={({ target }) => setPasswordConfirm(target.value)}
                     />
-                    <Form.Submit type="submit">
+                    <Form.Submit disabled={loading} type="submit">
                         Sign Up
                         </Form.Submit>
                     <Form.Text>

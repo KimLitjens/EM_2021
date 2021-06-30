@@ -1,5 +1,6 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext'
 
 import MatchDataContext from './context/MatchDataContext'
 import * as ROUTES from './constants/routes'
@@ -33,16 +34,19 @@ export default function App() {
     getTopscorers()
   }, [])
   return (
-    <MatchDataContext.Provider value={{ allMatchData, topScorers }} >
-      <Router>
-        <Suspense fallback={<p>Loading...</p>}>
-          <Switch>
-            <Route path={ROUTES.DASHBOARD} component={Dashboard} exact />
-            <Route path={ROUTES.SIGNUP} component={Signup} />
-          </Switch>
-        </Suspense>
-      </Router>
-    </MatchDataContext.Provider>
+    <AuthProvider>
+      <MatchDataContext.Provider value={{ allMatchData, topScorers }} >
+        <Router>
+          <Suspense fallback={<p>Loading...</p>}>
+            <Switch>
+              <Route path={ROUTES.DASHBOARD} component={Dashboard} exact />
+              <Route path={ROUTES.SIGNUP} component={Signup} />
+            </Switch>
+          </Suspense>
+        </Router>
+      </MatchDataContext.Provider>
+    </AuthProvider>
+
   );
 }
 
