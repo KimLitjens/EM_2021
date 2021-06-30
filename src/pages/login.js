@@ -4,30 +4,25 @@ import { Form } from '../components';
 import { useAuth } from '../context/AuthContext'
 import { useHistory } from 'react-router-dom'
 
-
-export default function Signup() {
+export default function Login() {
 
     const [emailAddress, setEmailAddress] = useState('');
     const [password, setPassword] = useState('');
-    const [passwordConfirm, setPasswordConfirm] = useState('')
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false)
-    const { signup } = useAuth()
+    const { login } = useAuth()
     const history = useHistory()
 
-    async function handleSignup(e) {
+    async function handleLogin(e) {
         e.preventDefault()
 
-        if (password !== passwordConfirm) {
-            return setError('Passwords do not match')
-        }
         try {
             setError('')
             setLoading(true)
-            await signup(emailAddress, password)
+            await login(emailAddress, password)
             history.push("/")
         } catch {
-            setError('Failed to create an account')
+            setError('Failed to sign in')
         }
         setLoading(false)
     }
@@ -35,9 +30,9 @@ export default function Signup() {
         <div>
             <HeaderContainer />
             <Form className="">
-                <Form.Title>Sign Up</Form.Title>
+                <Form.Title>Log In</Form.Title>
                 {error && <Form.Error>{error}</Form.Error>}
-                <Form.Base onSubmit={handleSignup} method="POST">
+                <Form.Base onSubmit={handleLogin} method="POST">
                     <Form.Label for="emailAdress">Email Address</Form.Label>
                     <Form.Input
                         value={emailAddress}
@@ -50,18 +45,11 @@ export default function Signup() {
                         autoComplete="off"
                         onChange={({ target }) => setPassword(target.value)}
                     />
-                    <Form.Label for="passwordConfirm">Password Confirmation</Form.Label>
-                    <Form.Input
-                        type="password"
-                        value={passwordConfirm}
-                        autoComplete="off"
-                        onChange={({ target }) => setPasswordConfirm(target.value)}
-                    />
                     <Form.Submit disabled={loading} type="submit">
-                        Sign Up
+                        Log In
                         </Form.Submit>
                     <Form.Text>
-                        Already a user? <Form.Link to="/login">Log in</Form.Link>
+                        Need an account? <Form.Link to="/signup">Sign Up</Form.Link>
                     </Form.Text>
                 </Form.Base>
             </Form>

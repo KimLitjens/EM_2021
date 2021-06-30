@@ -7,6 +7,7 @@ import * as ROUTES from './constants/routes'
 
 const Dashboard = lazy(() => import('./pages/dashboard'));
 const Signup = lazy(() => import('./pages/signup'));
+const Login = lazy(() => import('./pages/login'));
 
 const ApiKey = process.env.REACT_APP_API_KEY
 const allMatchesApi = `https://app.sportdataapi.com/api/v1/soccer/matches?apikey=${ApiKey}&season_id=510&date_from=2020-09-19`
@@ -41,6 +42,9 @@ export default function App() {
             <Switch>
               <Route path={ROUTES.DASHBOARD} component={Dashboard} exact />
               <Route path={ROUTES.SIGNUP} component={Signup} />
+              <Route path={ROUTES.LOGIN} component={Login} />
+
+
             </Switch>
           </Suspense>
         </Router>

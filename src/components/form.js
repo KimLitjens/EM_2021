@@ -1,7 +1,5 @@
-
-
-
 import React from 'react';
+import { Link as ReachRouterLink } from 'react-router-dom'
 
 export default function Form({ children, ...restProps }) {
     return <div {...restProps} className="border border-gray-300 rounded-md max-w-lg m-auto p-2">{children}</div>;
@@ -19,12 +17,8 @@ Form.Text = function FormText({ children, ...restProps }) {
     return <p {...restProps} className="text-center text-gray-600">{children}</p>;
 }
 
-Form.TextSmall = function FormTextSmall({ children, ...restProps }) {
-    return <p {...restProps}>{children}</p>;
-}
-
 Form.Link = function FormLink({ children, ...restProps }) {
-    return <a {...restProps}>{children}</a>;
+    return <ReachRouterLink {...restProps} className="text-blue-500">{children}</ReachRouterLink>;
 }
 
 Form.Error = function FormError({ children, ...restProps }) {
@@ -32,10 +26,10 @@ Form.Error = function FormError({ children, ...restProps }) {
 }
 
 Form.Input = function FormInput({ children, ...restProps }) {
-    return <input {...restProps} className="border border-gray-300 text-black rounded my-2">{children}</input>;
+    return <input {...restProps} className="border border-gray-300 text-black rounded my-2 px-2">{children}</input>;
 }
 
-Form.Label = function FormInput({ children, ...restProps }) {
+Form.Label = function FormLabel({ children, ...restProps }) {
     return <p {...restProps} className="text-black">{children}</p>;
 }
 
