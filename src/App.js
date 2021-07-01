@@ -1,9 +1,10 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext'
 
+import { AuthProvider } from './context/AuthContext'
 import MatchDataContext from './context/MatchDataContext'
 import * as ROUTES from './constants/routes'
+import { PrivateRoute } from './helpers/privateRoute'
 
 const Dashboard = lazy(() => import('./pages/dashboard'));
 const Signup = lazy(() => import('./pages/signup'));
@@ -16,7 +17,6 @@ const topScorersApi = `https://app.sportdataapi.com/api/v1/soccer/topscorers?api
 export default function App() {
   const [allMatchData, setAllMatchData] = useState([])
   const [topScorers, setTopscorers] = useState([])
-
 
   function getAllMatch() {
     fetch(allMatchesApi)
@@ -40,10 +40,9 @@ export default function App() {
         <Router>
           <Suspense fallback={<p>Loading...</p>}>
             <Switch>
-              <Route path={ROUTES.DASHBOARD} component={Dashboard} exact />
+              <PrivateRoute path={ROUTES.DASHBOARD} component={Dashboard} exact />
               <Route path={ROUTES.SIGNUP} component={Signup} />
               <Route path={ROUTES.LOGIN} component={Login} />
-
             </Switch>
           </Suspense>
         </Router>
