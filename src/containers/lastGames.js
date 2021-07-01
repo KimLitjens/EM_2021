@@ -7,7 +7,7 @@ export function LastGamesContainer() {
     const sortedMatchData = allMatchData.sort((a, b) => new Date(a.match_start) - new Date(b.match_start))
     const lastFiveMatches = sortedMatchData.filter(match => match.status_code === 3 || match.status_code === 31 || match.status_code === 32).slice(-5)
     return (
-        <div>
+        <Games>
             <Games.Title>Last Games</Games.Title>
             {lastFiveMatches.map((content) => (
                 <Games.Game key={content.match_id}>
@@ -19,6 +19,6 @@ export function LastGamesContainer() {
                                     : null}</Games.Score>
                 </Games.Game>))}
             {/* <h1>some text</h1> */}
-        </div>
+        </Games>
     )
 }

@@ -44,7 +44,6 @@ export default function App() {
               <Route path={ROUTES.SIGNUP} component={Signup} />
               <Route path={ROUTES.LOGIN} component={Login} />
 
-
             </Switch>
           </Suspense>
         </Router>
