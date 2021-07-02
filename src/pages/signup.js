@@ -7,6 +7,8 @@ import { useHistory } from 'react-router-dom'
 
 export default function Signup() {
 
+    const [username, setUsername] = useState('')
+    const [fullName, setFullName] = useState('')
     const [emailAddress, setEmailAddress] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('')
@@ -38,7 +40,17 @@ export default function Signup() {
                 <Form.Title>Sign Up</Form.Title>
                 {error && <Form.Error>{error}</Form.Error>}
                 <Form.Base onSubmit={handleSignup} method="POST">
-                    <Form.Label for="emailAdress">Email Address</Form.Label>
+                    <Form.Label for="username">User Name</Form.Label>
+                    <Form.Input
+                        value={username}
+                        onChange={({ target }) => setUsername(target.value)}
+                    />
+                    <Form.Label for="fullName">Full Name</Form.Label>
+                    <Form.Input
+                        value={fullName}
+                        onChange={({ target }) => setFullName(target.value)}
+                    />
+                    <Form.Label for="emailAddress">Email Address</Form.Label>
                     <Form.Input
                         value={emailAddress}
                         onChange={({ target }) => setEmailAddress(target.value)}
