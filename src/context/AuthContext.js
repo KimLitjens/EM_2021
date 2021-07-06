@@ -23,16 +23,6 @@ export function AuthProvider({ children }) {
         return auth.signOut()
     }
 
-    async function doesUsernameExist(username) {
-        const result = await auth
-            .firestore()
-            .collection('users')
-            .where('username', '==', username)
-            .get();
-
-        return result.docs.map((user) => user.data().length > 0);
-    }
-
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user)
@@ -48,7 +38,6 @@ export function AuthProvider({ children }) {
         signup,
         login,
         logout,
-        doesUsernameExist
     }
 
     return (

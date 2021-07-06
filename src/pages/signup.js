@@ -1,11 +1,16 @@
-import React, { useState, } from 'react';
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom'
+import FirestoreContext from '../context/FirestoreContext'
+import * as ROUTES from '../constants/routes'
 import { HeaderContainer } from '../containers/header';
 import { Form } from '../components';
 import { useAuth } from '../context/AuthContext'
-import { useHistory } from 'react-router-dom'
+import { doesUsernameExist } from '../services/firebase'
 
 
 export default function Signup() {
+    const { firestore } = useContext(FirestoreContext)
+    const history = useHistory()
 
     const [username, setUsername] = useState('')
     const [fullName, setFullName] = useState('')
@@ -15,24 +20,47 @@ export default function Signup() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false)
     const { signup } = useAuth()
-    const history = useHistory()
 
     async function handleSignup(e) {
         e.preventDefault()
 
-        if (password !== passwordConfirm) {
-            return setError('Passwords do not match')
-        }
-        try {
-            setError('')
-            setLoading(true)
-            await signup(emailAddress, password)
-            history.push("/")
-        } catch {
-            setError('Failed to create an account')
+        const usernameExists = await doesUsernameExist(username)
+        if (!usernameExists.legth) {
+            try {
+                setError('')
+                setLoading(true)
+                const createdUserResult = await signup(emailAddress, password)
+
+                await createdUserResult.user.updateProfile({
+                    displayName: username
+                })
+
+                await firestore.collection('users').add({
+                    userId: createdUserResult.user.uid,
+                    username: username.toLowerCase(),
+                    fullName,
+                    emailAddress: emailAddress.toLowerCase(),
+                    dateCreated: Date.now()
+                })
+                history.push(ROUTES.DASHBOARD)
+            } catch (error) {
+                setFullName('')
+                setEmailAddress('')
+                setPassword('')
+                setPasswordConfirm('')
+                setError(error.message)
+            }
+        } else {
+            setFullName('')
+            setEmailAddress('')
+            setPassword('')
+            setPasswordConfirm('')
+            setError('That username is already taken, please try oanother!')
         }
         setLoading(false)
     }
+
+
     return (
         <div>
             <HeaderContainer />
