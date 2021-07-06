@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Games({ children, ...restProps }) {
-    return <container {...restProps} >{children}</container>
+    return <div {...restProps} >{children}</div>
 }
 
 Games.Title = function Title({ children, ...restProps }) {

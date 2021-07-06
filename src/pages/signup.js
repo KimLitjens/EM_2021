@@ -23,7 +23,6 @@ export default function Signup() {
 
     async function handleSignup(e) {
         e.preventDefault()
-
         const usernameExists = await doesUsernameExist(username)
         if (!usernameExists.legth) {
             try {

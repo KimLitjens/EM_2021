@@ -1,8 +1,8 @@
-import React, { lazy, Suspense, useEffect, useState } from 'react'
+import React, { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { AuthProvider } from './context/AuthContext'
-import MatchDataContext from './context/MatchDataContext'
+import { MatchDataProvider } from './context/MatchDataContext'
 import * as ROUTES from './constants/routes'
 import { PrivateRoute } from './helpers/privateRoute'
 
@@ -10,33 +10,11 @@ const Dashboard = lazy(() => import('./pages/dashboard'));
 const Signup = lazy(() => import('./pages/signup'));
 const Login = lazy(() => import('./pages/login'));
 
-const ApiKey = process.env.REACT_APP_API_KEY
-const allMatchesApi = `https://app.sportdataapi.com/api/v1/soccer/matches?apikey=${ApiKey}&season_id=510&date_from=2020-09-19`
-const topScorersApi = `https://app.sportdataapi.com/api/v1/soccer/topscorers?apikey=${ApiKey}&season_id=510`
-
 export default function App() {
-  const [allMatchData, setAllMatchData] = useState([])
-  const [topScorers, setTopscorers] = useState([])
 
-  function getAllMatch() {
-    fetch(allMatchesApi)
-      .then(response => response.json())
-      .then(response => setAllMatchData(response.data))
-  }
-
-  function getTopscorers() {
-    fetch(topScorersApi)
-      .then(response => response.json())
-      .then(response => setTopscorers(response.data))
-  }
-
-  useEffect(() => {
-    getAllMatch()
-    getTopscorers()
-  }, [])
   return (
     <AuthProvider>
-      <MatchDataContext.Provider value={{ allMatchData, topScorers }} >
+      <MatchDataProvider>
         <Router>
           <Suspense fallback={<p>Loading...</p>}>
             <Switch>
@@ -46,7 +24,7 @@ export default function App() {
             </Switch>
           </Suspense>
         </Router>
-      </MatchDataContext.Provider>
+      </MatchDataProvider>
     </AuthProvider>
 
   );

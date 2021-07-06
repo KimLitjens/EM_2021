@@ -7,7 +7,7 @@ export function LogoutContainer() {
     const [error, setError] = useState('')
     const { currentUser, logout } = useAuth()
     const history = useHistory()
-
+    console.log(currentUser)
     async function handleLogout() {
         setError('')
 
@@ -23,7 +23,7 @@ export function LogoutContainer() {
     return (
         <Logout>
             {error && <Logout.Error>{error}</Logout.Error>}
-            <strong>email:</strong> {currentUser.email}
+            <strong>User:</strong> {currentUser.displayName}
             <Logout.Button onClick={handleLogout} >Log Out</Logout.Button>
         </Logout>
     )

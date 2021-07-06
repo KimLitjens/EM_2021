@@ -1,10 +1,10 @@
-import React, { useContext } from 'react'
-import MatchDataContext from "../context/MatchDataContext"
+import React from 'react'
+import { useMatchData } from '../context/MatchDataContext'
 import { TopScorers } from '../components/'
 
 
 export function TopScorersContainer() {
-    const { topScorers } = useContext(MatchDataContext);
+    const { topScorers } = useMatchData();
     const top10Scorers = topScorers.slice(0, 10)
 
     return (

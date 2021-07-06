@@ -1,9 +1,9 @@
-import React, { useContext } from 'react'
-import MatchDataContext from "../context/MatchDataContext"
+import React from 'react'
+import { useMatchData } from '../context/MatchDataContext'
 import { Games } from '../components/'
 
 export function NextGamesContainer() {
-    const { allMatchData } = useContext(MatchDataContext);
+    const { allMatchData } = useMatchData();
     const sortedMatchData = allMatchData.sort((a, b) => new Date(a.match_start) - new Date(b.match_start))
     const nextFiveMatches = sortedMatchData.filter(match => match.status_code === 0).slice(0, 5)
 
