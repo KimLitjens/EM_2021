@@ -20,6 +20,5 @@ export function TopScorersContainer() {
                     </TopScorers.Country>
                 </TopScorers.Player>))}
         </div>
-        // <h1>some text</h1>
     )
 }
